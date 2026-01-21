@@ -3,54 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwiee - Coming Soon</title>
+    <title>Qwiee - AI Image Generation</title>
     <style>
-        body, html {
-            height: 100%;
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --accent-color: #3b82f6;
+            --secondary-text: #94a3b8;
+            --card-bg: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0f172a; /* Темно-синий фон */
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+        .nav-wrapper {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            text-align: center;
         }
-        .content {
-            padding: 20px;
-        }
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-        }
-        p {
+        .logo {
             font-size: 1.5rem;
-            color: #94a3b8;
-            margin-bottom: 3rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: transparent;
-            color: #ffffff;
-            border: 2px solid #ffffff;
+            font-weight: bold;
+            color: white;
             text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            letter-spacing: -1px;
         }
-        .btn:hover {
-            background-color: #ffffff;
-            color: #0f172a;
+        .nav-links a {
+            color: var(--secondary-text);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: #162032;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .card p {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section (Critical for Paddle) */
+        .pricing {
+            padding: 80px 0;
+        }
+        .price-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .price-credits {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+        .features-list li {
+            margin-bottom: 10px;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        /* Footer (Critical for Compliance) */
+        footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid #1e293b;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col a {
+            color: var(--secondary-text);
+            text-decoration: none;
+        }
+        .footer-col a:hover {
+            color: white;
+        }
+        .legal-info {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>qwiee</h1>
-        <p>Coming Soon</p>
-        <a href="terms.html" class="btn">Terms of Service</a>
-    </div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">qwiee</a>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="terms.html">Legal</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Turn Ideas into Art with AI</h1>
+            <p>Generate high-quality images from text, voice, or existing images. 
+               Simple, fast, and royalty-free for commercial use.</p>
+            <a href="#" class="btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">What you can do</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Text to Image</h3>
+                    <p>Describe what you want to see, and our AI will generate unique, high-fidelity images in seconds.</p>
+                </div>
+                <div class="card">
+                    <h3>Image to Image</h3>
+                    <p>Upload a reference photo and transform it into a new style or variation using AI prompts.</p>
+                </div>
+                <div class="card">
+                    <h3>Commercial Rights</h3>
+                    <p>You own the images you create. Use them for your projects, games, or marketing materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (Mandatory for Paddle Review) -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple Pricing</h2>
+            <div class="grid">
+                <!-- Plan 1 -->
+                <div class="price-card">
+                    <h3>Starter</h3>
+                    <div class="price-amount">$9.00</div>
+                    <span class="price-credits">500 Credits</span>
+                    <ul class="features-list">
+                        <li>~250 Standard Images</li>
+                        <li>Standard Speed</li>
+                        <li>Commercial License</li>
+                        <li>Public Generation</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Buy Credits</a>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="price-card">
+                    <h3>Creator</h3>
+                    <div class="price-amount">$25.00</div>
+                    <span class="price-credits">1500 Credits</span>
+                    <ul class="features-list">
+                        <li>~750 Standard Images</li>
+                        <li>Fast Generation</li>
+                        <li>Commercial License</li>
+                        <li>Private Mode</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Buy Credits</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="price-card">
+                    <h3>Pro</h3>
+                    <div class="price-amount">$80.00</div>
+                    <span class="price-credits">5000 Credits</span>
+                    <ul class="features-list">
+                        <li>~2500 Standard Images</li>
+                        <li>Priority Speed</li>
+                        <li>Commercial License</li>
+                        <li>Private Mode</li>
+                    </ul>
+                    <a href="#" class="btn-primary">Buy Credits</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Legal Info (Mandatory for Paddle Review) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Qwiee</h4>
+                    <p>AI-powered creativity tools for everyone.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="terms.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:legal@qwiee.com">legal@qwiee.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="legal-info">
+                <p>&copy; 2026 Qwiee. All rights reserved.</p>
+                <!-- BUSINESS NAME (Sole Proprietor) - Required by Paddle -->
+                <p><strong>Isaev Dmitrii</strong>, Sole Proprietor (Georgia).</p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
